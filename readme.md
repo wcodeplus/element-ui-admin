@@ -47,3 +47,5 @@ new Vue({
   render: (h) => h(App),
 }).$mount("#app");
 ```
+补充一下router、vuex和main中对应的文件夹和文件
+

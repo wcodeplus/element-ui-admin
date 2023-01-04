@@ -1,13 +1,11 @@
-export default {
-  //存储数据
-  state: {
-    isCollapse: false,
+import Vue from "vue";
+import Vuex from "vuex";
+import tab from "./tab";
+
+Vue.use(Vuex);
+
+export default new Vuex.Store({
+  modules: {
+    tab,
   },
-  //调用方法
-  mutations: {
-    collapseMenu(state) {
-      state.isCollapse = !state.isCollapse;
-    },
-  },
-  actions: {},
-};
+});
