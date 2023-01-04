@@ -48,4 +48,4 @@ new Vue({
 }).$mount("#app");
 ```
 补充一下router、vuex和main中对应的文件夹和文件
-
+> 参考：https://www.cnblogs.com/qdhxhz/p/12586292.html https://github.com/yudiandemingzi/mall-manage-system/blob/master/01-manage-system-home/src/router/index.js
