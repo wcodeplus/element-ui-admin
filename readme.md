@@ -12,3 +12,38 @@
 - cd element-ui-admin
 - npm run serve
 - 本地跑起来了 http://localhost:8080/
+补充
+- element-ui
+    - npm i element-ui --save
+- vuex
+    - npm i vuex@3 --save-dev
+- sass
+    - npm install sass-loader@8.0.2 sass@1.26.5  --save-dev
+- axios
+    - npm install axios --save
+- mockjs
+    - npm i mockjs --save
+
+> --save等同于-S，--save-dev 等同于 -D； 区别在于 package.json 中只能用小写的
+
+```
+import Vue from "vue";
+import App from "./App.vue";
+import router from "./router"; //引入 vue-router
+import store from "./store"; //引入 vuex
+// 全局配置
+import "@/assets/scss/reset.scss"; //全局样式
+import "element-ui/lib/theme-chalk/index.css"; //element-ui样式
+import http from "@/api/config"; //axios
+import "./mock"; // mockjs
+// 第三方包
+import ElementUI from "element-ui";
+Vue.use(ElementUI);
+Vue.prototype.$http = http;
+Vue.config.productionTip = false;
+new Vue({
+  router,
+  store,
+  render: (h) => h(App),
+}).$mount("#app");
+```

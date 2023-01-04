@@ -1,31 +1,40 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import Vue from "vue";
+import VueRouter from "vue-router";
+Vue.use(VueRouter);
 
-Vue.use(VueRouter)
-
-const routes = [
-  {
-    path: '/',
-    name: 'home',
-    component: HomeView
-  },
-  {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: function () {
-      return import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-    }
-  }
-]
-
-const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes
-})
-
-export default router
+// 完整路由代码
+export default new VueRouter({
+  routes: [
+    {
+      path: "/",
+      component: () => import("@/views/Main"),
+      children: [
+        {
+          path: "/",
+          name: "home",
+          component: () => import("@/views/Home/Home"),
+        },
+        {
+          path: "/user",
+          name: "user",
+          component: () => import("@/views/UserManage/UserManage"),
+        },
+        {
+          path: "/mall",
+          name: "mall",
+          component: () => import("@/views/MallManage/MallManage"),
+        },
+        {
+          path: "/page1",
+          name: "page1",
+          component: () => import("@/views/Other/PageOne"),
+        },
+        {
+          path: "/page2",
+          name: "page2",
+          component: () => import("@/views/Other/PageTwo"),
+        },
+      ],
+    },
+  ],
+});
