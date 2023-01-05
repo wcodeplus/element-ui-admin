@@ -1,3 +1,5 @@
+import moment from "moment";
+
 // 手动触发数据双向绑定的更新
 export const trigger = (vnode, input) => {
   if (vnode.componentInstance) {
@@ -125,4 +127,56 @@ export const changeDecimal = (number, bitNum) => {
     s_x = s_x.substring(0, pos_decimal + bitNum + 1);
   }
   return s_x;
+};
+
+/**
+ * @param {Number} num
+ * @return {String}
+ * @description 数字类型转千分位字符串
+ */
+export const numToThs = (num = "") => {
+  if (!num) {
+    return "0.00";
+  }
+  const numArray = num.toString().split(".");
+  return `${numArray[0].replace(/(\d)(?=(?:\d{3})+$)/g, "$1,")}${
+    numArray[1] ? `.${numArray[1]}` : ""
+  }`;
+};
+
+/**
+ * number.toFixed保留小数点
+ * @param {*} value 值
+ * @param {*} count 保留几位小数
+ */
+export function toFixed(value, count = 2) {
+  const number = +value;
+  if (Number.isNaN(value) || Number.isNaN(number)) {
+    return "";
+  }
+  if (number % 1 === 0) {
+    return `${number}.${Array(count).fill(0).join("")}`;
+  }
+  return round(number, count);
+}
+
+export const showAmount = (value) => {
+  // eslint-disable-next-line eqeqeq
+  if (value != undefined) {
+    const realValue = String(value).replace(/,/g, "");
+    return value === null ? "0.00" : numToThs(toFixed(realValue, 2));
+  }
+  return numToThs(toFixed(value, 2));
+};
+
+export const showWeight = (value) => {
+  return value === null ? "0.000" : numToThs(toFixed(value, 3));
+};
+
+export const showRate = (value) => {
+  return value === null ? "0.0000" : numToThs(toFixed(value, 4));
+};
+
+export const formatDate = (value, format = "YYYY-MM-DD") => {
+  return value ? moment(value).format(format) : "";
 };
