@@ -110,6 +110,7 @@ export default {
   methods: {
     getTableData() {
       this.$http.get("/home/getData").then((res) => {
+        console.log(res)
         res = res.data;
         this.tableData = res.data.tableData;
       });

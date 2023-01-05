@@ -9,8 +9,8 @@
     active-text-color="#ffd04b"
   >
     <!--是否水平折叠收起菜单 会影响这里字段的显示 -->
-    <h3 v-show="isCollapse">偶囧</h3>
-    <h3 v-show="!isCollapse">偶囧后台管理系统</h3>
+    <h3 v-show="isCollapse">后台</h3>
+    <h3 v-show="!isCollapse">后台管理系统</h3>
     <el-menu-item
       :index="item.path"
       v-for="item in noChildren"
@@ -72,36 +72,36 @@ export default {
           url: "Home/Home",
         },
         {
-          path: "/mall",
-          name: "mall",
-          label: "商品管理",
+          path: "/input",
+          name: "input",
+          label: "input组件",
           icon: "video-play",
-          url: "MallManage/MallManage",
+          url: "InputComponent/InputComponent",
         },
         {
-          path: "/user",
-          name: "user",
-          label: "用户管理",
-          icon: "user",
-          url: "UserManage/UserManage",
+          path: "/dialog",
+          name: "dialog",
+          label: "dialog组件",
+          icon: "video-play",
+          url: "DialogComponent/DialogComponent",
         },
         {
-          label: "其他",
+          label: "table组件",
           icon: "location",
           children: [
             {
-              path: "/page1",
-              name: "page1",
-              label: "页面1",
+              path: "/table1",
+              name: "table1",
+              label: "table1",
               icon: "setting",
-              url: "Other/PageOne",
+              url: "TableComponent/TableOne",
             },
             {
-              path: "/page2",
-              name: "page2",
-              label: "页面2",
+              path: "/table2",
+              name: "table2",
+              label: "table2",
               icon: "setting",
-              url: "Other/PageTwo",
+              url: "TableComponent/TableTwo",
             },
           ],
         },
