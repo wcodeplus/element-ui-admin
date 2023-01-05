@@ -8,6 +8,7 @@ import "@/assets/scss/reset.scss"; //全局样式
 import "element-ui/lib/theme-chalk/index.css"; //element-ui样式
 import http from "@/api/config"; //axios
 import "./mock"; // mockjs
+import "./utils/directive";
 
 // 第三方包
 import ElementUI from "element-ui";
