@@ -86,6 +86,20 @@ export default {
           url: "DialogComponent/DialogComponent",
         },
         {
+          path: "/loading",
+          name: "loading",
+          label: "loading组件",
+          icon: "video-play",
+          url: "LoadingComponent/LoadingComponent",
+        },
+        {
+          path: "/form",
+          name: "form",
+          label: "form组件",
+          icon: "video-play",
+          url: "FormComponent/FormComponent",
+        },
+        {
           label: "table组件",
           icon: "location",
           children: [

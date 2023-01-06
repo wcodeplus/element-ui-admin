@@ -3,14 +3,14 @@ import VueRouter from "vue-router";
 Vue.use(VueRouter);
 
 //修改router的跳转事件（重复点击菜单），取消报错提示。
-const originalReplace = VueRouter.prototype.replace
-const originalPush = VueRouter.prototype.push
+const originalReplace = VueRouter.prototype.replace;
+const originalPush = VueRouter.prototype.push;
 VueRouter.prototype.replace = function replace(location) {
-  return originalReplace.call(this, location).catch(err => err)
-}
+  return originalReplace.call(this, location).catch((err) => err);
+};
 VueRouter.prototype.push = function push(location) {
-  return originalPush.call(this, location).catch(err => err)
-}
+  return originalPush.call(this, location).catch((err) => err);
+};
 
 // 完整路由代码
 export default new VueRouter({
@@ -33,6 +33,16 @@ export default new VueRouter({
           path: "/dialog",
           name: "dialog",
           component: () => import("@/views/DialogComponent/DialogComponent"),
+        },
+        {
+          path: "/loading",
+          name: "loading",
+          component: () => import("@/views/LoadingComponent/LoadingComponent"),
+        },
+        {
+          path: "/form",
+          name: "form",
+          component: () => import("@/views/FormComponent/FormComponent"),
         },
         {
           path: "/table1",
