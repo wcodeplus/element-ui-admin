@@ -59,6 +59,9 @@ new Vue({
 - 汇总问题：https://www.jianshu.com/p/cc036006f7fe
 - 校验属性层级比较深,无法触发规则校验：https://www.jianshu.com/p/90db28e7add7
 
+紧急
+- 处理一下昨天碰到的那个切换验证问题
+
 ## 下一篇
 做jest的前端测试
 参考

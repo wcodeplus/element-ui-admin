@@ -100,6 +100,13 @@ export default {
           url: "FormComponent/FormComponent",
         },
         {
+          path: "/autocomplete",
+          name: "autocomplete",
+          label: "autocomplete组件",
+          icon: "video-play",
+          url: "AutocompleteComponent/AutocompleteComponent",
+        },
+        {
           label: "table组件",
           icon: "location",
           children: [

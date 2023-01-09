@@ -35,6 +35,12 @@ export default new VueRouter({
           component: () => import("@/views/DialogComponent/DialogComponent"),
         },
         {
+          path: "/autocomplete",
+          name: "autocomplete",
+          component: () =>
+            import("@/views/AutocompleteComponent/AutocompleteComponent"),
+        },
+        {
           path: "/loading",
           name: "loading",
           component: () => import("@/views/LoadingComponent/LoadingComponent"),
