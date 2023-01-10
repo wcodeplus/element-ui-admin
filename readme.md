@@ -60,7 +60,7 @@ new Vue({
 - 校验属性层级比较深,无法触发规则校验：https://www.jianshu.com/p/90db28e7add7
 
 紧急
-- 处理一下昨天碰到的那个切换验证问题
+- 处理一下昨天碰到的那个切换验证问题 jinrong_console 仓库 jinrong_console\src\views\vipbsr\trade\change_pick_ways.vue 文件 574行
 
 ## 下一篇
 做jest的前端测试

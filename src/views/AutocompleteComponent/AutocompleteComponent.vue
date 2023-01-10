@@ -5,13 +5,17 @@
         <el-card>
           <div class="sub-title">自动完成（远程搜索）-普通</div>
           <el-autocomplete
-            v-model="state"
+            v-model.trim="state"
             :fetch-suggestions="querySearchAsync"
             placeholder="请输入内容"
             @select="handleSelect"
           ></el-autocomplete>
           <el-divider></el-divider>
           <div class="sub-title">选中：{{ selectVal.value }}</div>
+          <div class="sub-title">特殊要求：复制带有空格的字符串进行搜索</div>
+          <div class="sub-title">
+            解决：v-model.trim没法完成，需要在querySearchAsync手动清除一次
+          </div>
         </el-card>
       </el-col>
       <el-col :span="8">
@@ -115,6 +119,7 @@ export default {
   },
   methods: {
     querySearchAsync(name, cb) {
+      const newName = name.trim(); // 再用newName去搜索
       this.$http.get("/home/getData").then((res) => {
         console.log("res :>> ", res);
         if (res.status === 200) {
