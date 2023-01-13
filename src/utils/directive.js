@@ -31,10 +31,14 @@ import {
       this.$refs.mInput.blur();
     });
  *
+ * ----------20230112更新-------------
+ * 1.修复precision=0且round=true时多出一个小数点的问题，round为false是好的
+ * 2.修复默认小数位不能取0的问题
  */
 Vue.directive("Money", {
   bind(el, binding, vNode) {
     const input = el.getElementsByTagName("input")[0];
+    console.log("input :>> ", input);
     const setVal = (val) => {
       if (vNode.componentInstance) {
         vNode.componentInstance.$emit("input", val);
@@ -109,10 +113,12 @@ Vue.directive("Money", {
 
       val = parseFloat(val);
       let arg_precision = 0;
+      // 如果precision是0或undefined，不走这里，arg_precision依然为0
       if (binding.value.precision) {
         arg_precision = parseFloat(binding.value.precision);
       }
       // 不四舍五入
+      // if (binding.value.round && arg_precision !== 0) {
       if (binding.value.round && arg_precision !== 0) {
         val = val ? changeDecimal(val, arg_precision) : val;
       } else if (val === 0) {
@@ -144,12 +150,20 @@ Vue.directive("Money", {
       )
         return;
       let val = parseFloat(getValueWithDropSeparator(input.value));
-      const precision = Number(binding.value?.precision || 2);
+      const precision = Number(binding.value?.precision || 0);
+      // const precision = Number(binding.value.precision);
       if (!binding.value.round) {
         val = val.toFixed(precision);
       } else {
-        val = val.toFixed(precision + 1);
-        val = val.substring(0, val.indexOf(".") + precision + 1);
+        // eslint-disable-next-line no-lonely-if
+        if (precision) {
+          val = val.toFixed(precision + 1);
+          val = val.substring(0, val.indexOf(".") + precision + 1);
+        } else {
+          // 修复零位小数的时候多出点小数点
+          val = val.toFixed(precision + 1);
+          val = val.substring(0, val.indexOf(".") + precision);
+        }
       }
       if (binding.value.isThousand) {
         setTimeout(() => {
@@ -164,7 +178,8 @@ Vue.directive("Money", {
     if (input.value === "" || input.value === undefined || input.value === null)
       return;
     let val = parseFloat(getValueWithDropSeparator(input.value));
-    const precision = Number(binding.value?.precision || 2);
+    const precision = Number(binding.value?.precision || 0);
+    // const precision = Number(binding.value.precision);
     if (!binding.value.round) {
       val = val.toFixed(precision);
     } else {

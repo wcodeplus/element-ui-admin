@@ -67,3 +67,79 @@ new Vue({
 参考
 - https://jspang.com/article/65
 - https://www.w3cschool.cn/jest_cn/
+
+
+
+<template>
+  <div class="container">
+    <el-form :inline="true" :model="formInline" class="demo-form-inline" v-if="isRefresh">
+      <el-form-item label="金额">
+        <el-input
+          v-model.trim="formInline.money"
+          placeholder="输入金额"
+          maxlength="20"
+          v-money="{max: 10000000, min: -10000000, precision: 3, round: true, isThousand: true}"
+          ref="mInput"
+        ></el-input>
+        {{ this.formInline.money }}
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="onSubmit">查询</el-button>
+        {{ this.formInline.a }}
+      </el-form-item>
+    </el-form>
+  </div>
+</template>
+
+<script>
+import {getTimestamp3, getTimestamp2} from "@/utils/time";
+
+export default {
+  data() {
+    return {
+      isRefresh: true,
+      formInline: {
+        money: "",
+        a: 1
+      }
+    };
+  },
+  methods: {
+    getTimestamp3,
+    getTimestamp2,
+    onSubmit() {
+      console.log("submit!", typeof this.getTimestamp3("2022-11-17"));
+      this.formInline.a = this.getTimestamp3("2022-11-17");
+    }
+  },
+  mounted() {
+    this.$set(this.formInline, "money", "11,021.1542131");
+    // this.formInline.money = "11,021.1542131";
+
+    /* 方法一 */
+    // this.$nextTick(() => {
+    //   this.$refs.mInput.focus();
+    //   this.$refs.mInput.blur();
+    // });
+
+    /* 方法二 */
+    // this.$nextTick(() => {
+    //   this.$forceUpdate();
+    // });
+
+    /* 方法三 */
+    this.$nextTick(() => {
+      this.isRefresh = false;
+      this.$nextTick(() => {
+        this.isRefresh = true;
+      });
+    });
+  }
+};
+</script>
+
+<style lang="scss" scoped>
+.container {
+  margin: 20px;
+}
+</style>
